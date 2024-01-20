@@ -1,19 +1,18 @@
-<!-- <app-header [title]="title" />
-
-<div class="user-info">
-  <h2>{{ postsUserAll.user.name }}</h2>
-</div>
-
-<div class="cardList">
-  <div *ngFor="let post of postsUserAll.posts">
-    <div class="card">
-      <a>
-        <h2>{{ postsUserAll.user.name }}</h2>
-      </a>
-      <h3>{{ post.title }}</h3>
-      <p>
-        {{ post.post }}
-      </p>
-    </div>
+<app-header [title]="title"></app-header>
+<div class="userPageContainer">
+  
+  <div class="buttCreateContainer">
+    <button class="buttCreate" (click)="toggleCreateForm()">Create Post</button>
   </div>
-</div> -->
+
+  <div *ngIf="showCreateForm" class="formContainer">
+    <form [formGroup]="myForm" class="formPost" (ngSubmit)="onSubmit()">
+      <h4>Create post</h4>
+      <input formControlName="title" class="inpPost" placeholder="title" type="text" />
+      <input formControlName="post" class="inpPost" placeholder="Post" type="textarea" />
+      <input class="inpPost" type="submit" />
+    </form>
+  </div>
+
+  <app-card-list [posts]="postsUserAll" />
+</div>

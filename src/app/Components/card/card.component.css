@@ -1,5 +1,41 @@
-.card{
+.card {
+    position: relative;
     width: 500px;
     height: 200px;
     border: 1px solid #000;
-}
+  }
+  
+  .buttMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .toggleMenuBtn {
+    cursor: pointer;
+  }
+  
+  .menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  .menu button {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .menu button:hover {
+    background-color: #f0f0f0;
+  }
+  

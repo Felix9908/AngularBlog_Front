@@ -35,16 +35,17 @@ export class LoginComponent {
     });
   }
 
+    
+
   public submitForm() {
-    console.log(this.myForm.value);
-    const formData = this.myForm.value;
-  
+    const formData = this.myForm.value; 
     this.http.post<any>('http://localhost:8000/login', formData).subscribe(
-      (response: { authenticated: boolean }) => {
+      (response: { authenticated: boolean, id: string }) => {
         console.log('Respuesta del servidor:', response);
         if (response.authenticated === true) {
+          console.log(response.id)
           alert("autenticado")
-          this.authService.setLoggedIn(true);
+          this.authService.setLoggedIn(true, response.id );
         }
       },
       (error) => {

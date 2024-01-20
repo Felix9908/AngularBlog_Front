@@ -1,6 +1,12 @@
 <div class="card">
-  
-  <h2>{{ posts.title }}</h2>
+  <div class="buttMenu">
+    <button class="toggleMenuBtn" (click)="toggleMenu()">...</button>
+    <div *ngIf="isMenuOpen" class="menu">
+      <button (click)="deletePost(posts.id)">Borrar</button>
+      <button (click)="editPost(posts.id)">Editar</button>
+    </div>
+  </div>
+  <h2 >{{ posts.title }}</h2>
   <a [routerLink]="['/userPage', posts.user_id]">
     <h3>{{ posts.name }}</h3>
   </a>
