@@ -1,0 +1,23 @@
+.formContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.inp{
+    margin: 10px;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}

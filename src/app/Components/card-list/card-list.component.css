@@ -1,0 +1,12 @@
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 10px;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

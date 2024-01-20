@@ -1,0 +1,12 @@
+<div class="container">
+    <form [formGroup]="myForm" (ngSubmit)="submitForm()" class="formContent">
+      <h4>Login</h4>
+      <input formControlName="name" class="inp" type="text" placeholder="user" />
+      <!-- Corregido el nombre del control a "user" -->
+      <input formControlName="password" class="inp" type="password" placeholder="password" />
+      <!-- Cambiado a type="password" para ocultar la contraseña -->
+      <input class="inp" type="submit" value="Login" />
+      <!-- Cambiado placeholder por value y corregido el texto del botón -->
+    </form>
+  </div>
+  

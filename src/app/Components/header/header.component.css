@@ -1,0 +1,12 @@
+.header {
+  height: 250px;
+  color: #fff;
+  padding: 5px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease-out;
+  background-image: url(../../../assets/blog_post-750x406.jpg);
+}
+.title {
+  padding: 5px;
+}

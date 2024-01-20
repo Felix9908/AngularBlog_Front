@@ -1,0 +1,10 @@
+<div class="card">
+  
+  <h2>{{ posts.title }}</h2>
+  <a [routerLink]="['/userPage', posts.user_id]">
+    <h3>{{ posts.name }}</h3>
+  </a>
+  <p>
+    {{ posts.post }}
+  </p>
+</div>
