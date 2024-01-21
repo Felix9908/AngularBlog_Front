@@ -1,6 +1,6 @@
 <app-header [title]="title"></app-header>
 <div class="userPageContainer">
-  <div class="buttCreateContainer">
+  <div *ngIf="userId == userIdLog && isLogged" class="buttCreateContainer">
     <button class="buttCreate" (click)="toggleCreateForm()">Create Post</button>
   </div>
 
@@ -29,7 +29,7 @@
   <app-card-list 
   (estadoCambiadoAlAbuelo)="onEstadoCambiado($event)" 
   (idTarjetaCambiadoAlAbuelo)="onIdTarjetaCambiado($event)" 
-  [posts]="postsUserAll"
+  [posts]="postsUserAll" [page]="page"
 ></app-card-list>
 
 

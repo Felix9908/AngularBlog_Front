@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DataService } from '../../Services/data.service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-card',
@@ -14,12 +15,27 @@ export class CardComponent {
   @Output() estadoCambiado = new EventEmitter<boolean>();
   @Output() idTarjetaCambiado = new EventEmitter<number>();
   @Input() posts: any;
+  @Input() page: string = '';
   isMenuOpen = false;
+  userId: string | null = null;
+  isLogged = false
+
+  ngOnInit(): void {
+    this.authService.userId$.subscribe((userId) => {
+      this.userId = (userId);
+    });
+    this.authService.isLoggedIn$.subscribe((isLogged) => {
+      this.isLogged = (isLogged);
+    });
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-  constructor(private dataservice: DataService){}
+  constructor(
+    private dataservice: DataService,
+    private authService: AuthService
+  ) {}
 
   deletePost(postId: number) {
     this.dataservice.deletePost(postId).subscribe(
@@ -31,6 +47,7 @@ export class CardComponent {
       }
     );
   }
+
   editPost(postId: number) {
     this.estadoCambiado.emit(true);
     this.idTarjetaCambiado.emit(postId);

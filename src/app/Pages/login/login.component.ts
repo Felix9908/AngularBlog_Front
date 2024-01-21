@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,18 +36,16 @@ export class LoginComponent {
       password: [],
     });
   }
-
-    
-
+  
   public submitForm() {
     const formData = this.myForm.value; 
     this.http.post<any>('http://localhost:8000/login', formData).subscribe(
       (response: { authenticated: boolean, id: string }) => {
         console.log('Respuesta del servidor:', response);
         if (response.authenticated === true) {
-          console.log(response.id)
           alert("autenticado")
           this.authService.setLoggedIn(true, response.id );
+          this.router.navigate(['/home']);
         }
       },
       (error) => {

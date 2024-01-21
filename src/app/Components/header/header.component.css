@@ -1,5 +1,5 @@
 .header {
-  height: 250px;
+  height: 90px;
   color: #fff;
   padding: 5px;
   background-size: cover;
@@ -8,6 +8,20 @@
   background-color: #aaa;
 /* background-image: url(../../../assets/blog_post-750x406.jpg); */
 }
+
+.content{
+  display: flex;
+  justify-content: space-between;
+}
+
 .title {
   padding: 5px;
+  align-self: flex-start;
+}
+
+.buttLogin{
+  padding: 5px;
+  align-self: flex-end;
+  margin-bottom: 30px;
+  margin-right: 10px;
 }

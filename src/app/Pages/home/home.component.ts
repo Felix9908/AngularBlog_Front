@@ -16,8 +16,8 @@ import { DataService } from '../../Services/data.service';
 })
 export class HomeComponent {
   title = "Blog"
-
   posts: any[] = [];
+  page = "home"
 
   constructor(private dataService: DataService) { }
 

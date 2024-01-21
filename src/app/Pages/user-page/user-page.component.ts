@@ -11,6 +11,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-user-page',
@@ -33,6 +34,9 @@ export class UserPageComponent {
   showCreateForm = false;
   tipeForm = '';
   idUpdatePost = 0;
+  page = 'user';
+  isLogged = false;
+  userIdLog: string | null = null;
 
   onEstadoCambiado(nuevoEstado: boolean) {
     this.showCreateForm = nuevoEstado;
@@ -46,7 +50,8 @@ export class UserPageComponent {
     private route: ActivatedRoute,
     private dataService: DataService,
     private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
     this.myForm = this.createMyForm();
   }
@@ -82,10 +87,13 @@ export class UserPageComponent {
           }
         );
       this.showCreateForm = false;
-    }else{
+    } else {
       const formEditData = this.myForm.value;
       this.http
-        .put<any>(`http://localhost:8000/editPosts/${this.idUpdatePost}`, formEditData)
+        .put<any>(
+          `http://localhost:8000/editPosts/${this.idUpdatePost}`,
+          formEditData
+        )
         .subscribe(
           (response: { authenticated: boolean; id: string }) => {
             console.log('Respuesta del servidor:', response);
@@ -115,5 +123,12 @@ export class UserPageComponent {
       this.title = this.postsUserAll[0].name + "'s blog";
     }
     this.myForm = this.createMyForm();
+
+    this.authService.userId$.subscribe((userId) => {
+      this.userIdLog = userId;
+    });
+    this.authService.isLoggedIn$.subscribe((isLogged) => {
+      this.isLogged = isLogged;
+    });
   }
 }

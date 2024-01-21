@@ -7,14 +7,17 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CardComponent, CommonModule],
   templateUrl: './card-list.component.html',
-  styleUrl: './card-list.component.css'
+  styleUrl: './card-list.component.css',
 })
 export class CardListComponent {
-   @Input() posts: any; 
-   @Output() estadoCambiadoAlAbuelo: EventEmitter<boolean> = new EventEmitter<boolean>();
-   @Output() idTarjetaCambiadoAlAbuelo: EventEmitter<number> = new EventEmitter<number>();
+  @Input() posts: any;
+  @Input() page: string = '';
+  @Output() estadoCambiadoAlAbuelo: EventEmitter<boolean> =
+    new EventEmitter<boolean>();
+  @Output() idTarjetaCambiadoAlAbuelo: EventEmitter<number> =
+    new EventEmitter<number>();
 
-   onEstadoCambiado(nuevoEstado: boolean) {
+  onEstadoCambiado(nuevoEstado: boolean) {
     this.estadoCambiadoAlAbuelo.emit(true);
   }
 
