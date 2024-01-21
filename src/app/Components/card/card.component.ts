@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DataService } from '../../Services/data.service';
 
@@ -11,8 +11,11 @@ import { DataService } from '../../Services/data.service';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
+  @Output() estadoCambiado = new EventEmitter<boolean>();
+  @Output() idTarjetaCambiado = new EventEmitter<number>();
   @Input() posts: any;
   isMenuOpen = false;
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -29,6 +32,7 @@ export class CardComponent {
     );
   }
   editPost(postId: number) {
-    alert("edit card " + postId )
+    this.estadoCambiado.emit(true);
+    this.idTarjetaCambiado.emit(postId);
   }
 }

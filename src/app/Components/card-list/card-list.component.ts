@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CardComponent } from '../../Components/card/card.component';
 import { CommonModule } from '@angular/common';
 
@@ -11,4 +11,14 @@ import { CommonModule } from '@angular/common';
 })
 export class CardListComponent {
    @Input() posts: any; 
+   @Output() estadoCambiadoAlAbuelo: EventEmitter<boolean> = new EventEmitter<boolean>();
+   @Output() idTarjetaCambiadoAlAbuelo: EventEmitter<number> = new EventEmitter<number>();
+
+   onEstadoCambiado(nuevoEstado: boolean) {
+    this.estadoCambiadoAlAbuelo.emit(true);
+  }
+
+  onIdTarjetaCambiado(postId: number) {
+    this.idTarjetaCambiadoAlAbuelo.emit(postId);
+  }
 }

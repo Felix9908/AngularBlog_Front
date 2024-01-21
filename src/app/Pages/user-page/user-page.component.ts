@@ -15,7 +15,13 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-user-page',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, CardListComponent, FormsModule, ReactiveFormsModule],
+  imports: [
+    HeaderComponent,
+    CommonModule,
+    CardListComponent,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.css',
 })
@@ -25,43 +31,75 @@ export class UserPageComponent {
   userId: string | null = null;
   title = '';
   showCreateForm = false;
+  tipeForm = '';
+  idUpdatePost = 0;
+
+  onEstadoCambiado(nuevoEstado: boolean) {
+    this.showCreateForm = nuevoEstado;
+    this.tipeForm = 'edit';
+  }
+  onIdTarjetaCambiado(postId: number) {
+    this.idUpdatePost = postId;
+  }
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
     private http: HttpClient,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
     this.myForm = this.createMyForm();
   }
 
   toggleCreateForm() {
     this.showCreateForm = !this.showCreateForm;
+    this.tipeForm = 'create';
   }
 
   private createMyForm(): FormGroup {
     return this.fb.group({
       title: [''],
       post: [''],
-      user_id: this.userId
+      user_id: this.userId,
     });
   }
 
   onSubmit() {
-    const formData = this.myForm.value; 
-    this.http.post<any>('http://localhost:8000/CreatePost', formData).subscribe(
-      (response: { authenticated: boolean, id: string }) => {
-        console.log('Respuesta del servidor:', response);
-        if (response.authenticated === true) {
-          console.log(response.id)
-          alert("datos enviados")
-        }
-      },
-      (error) => {
-        console.error('Error de la solicitud:', error);
-      }
-    );
-    this.showCreateForm = false;
+    if (this.tipeForm == 'create') {
+      const formData = this.myForm.value;
+      this.http
+        .post<any>('http://localhost:8000/CreatePost', formData)
+        .subscribe(
+          (response: { authenticated: boolean; id: string }) => {
+            console.log('Respuesta del servidor:', response);
+            if (response.authenticated === true) {
+              console.log(response.id);
+              alert('datos enviados');
+            }
+          },
+          (error) => {
+            console.error('Error de la solicitud:', error);
+          }
+        );
+      this.showCreateForm = false;
+    }else{
+      const formEditData = this.myForm.value;
+      this.http
+        .put<any>(`http://localhost:8000/editPosts/${this.idUpdatePost}`, formEditData)
+        .subscribe(
+          (response: { authenticated: boolean; id: string }) => {
+            console.log('Respuesta del servidor:', response);
+            if (response.authenticated === true) {
+              console.log(response.id);
+              alert('datos editados');
+            }
+          },
+          (error) => {
+            console.error('Error de la solicitud:', error);
+          }
+        );
+      this.showCreateForm = false;
+    }
   }
 
   ngOnInit() {

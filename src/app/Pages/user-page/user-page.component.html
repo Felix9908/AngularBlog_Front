@@ -1,18 +1,36 @@
 <app-header [title]="title"></app-header>
 <div class="userPageContainer">
-  
   <div class="buttCreateContainer">
     <button class="buttCreate" (click)="toggleCreateForm()">Create Post</button>
   </div>
 
   <div *ngIf="showCreateForm" class="formContainer">
     <form [formGroup]="myForm" class="formPost" (ngSubmit)="onSubmit()">
-      <h4>Create post</h4>
-      <input formControlName="title" class="inpPost" placeholder="title" type="text" />
-      <input formControlName="post" class="inpPost" placeholder="Post" type="textarea" />
-      <input class="inpPost" type="submit" />
+      <h4>{{ tipeForm }}</h4>
+      <input
+        formControlName="title"
+        class="inpPost"
+        placeholder="title"
+        type="text"
+      />
+      <input
+        formControlName="post"
+        class="inpPost"
+        placeholder="Post"
+        type="textarea"
+      />
+      <div>
+        <button class="inpPost" (click)="toggleCreateForm()">Cansel</button>
+        <input class="inpPost" type="submit" />
+      </div>
     </form>
   </div>
 
-  <app-card-list [posts]="postsUserAll" />
+  <app-card-list 
+  (estadoCambiadoAlAbuelo)="onEstadoCambiado($event)" 
+  (idTarjetaCambiadoAlAbuelo)="onIdTarjetaCambiado($event)" 
+  [posts]="postsUserAll"
+></app-card-list>
+
+
 </div>
