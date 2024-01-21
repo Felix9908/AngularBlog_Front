@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
   transition: transform 0.3s ease-out;
-  background-color: #aaa;
+  background-color: #bbb;
 /* background-image: url(../../../assets/blog_post-750x406.jpg); */
 }
 
@@ -24,4 +24,6 @@
   align-self: flex-end;
   margin-bottom: 30px;
   margin-right: 10px;
+  border: none;
+  font-size: 20px;
 }

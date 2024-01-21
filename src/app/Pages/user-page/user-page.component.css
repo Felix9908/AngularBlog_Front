@@ -8,6 +8,8 @@
   .buttCreate{
     background: #eee;
     padding: 5px;
+    border: none;
+    font-size: 20px;
   }
 
 .userPageContainer{
